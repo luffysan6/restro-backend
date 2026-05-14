@@ -88,11 +88,12 @@ export const getUser = async (req, res) => {
         role: existingUser.role,
       });
 
-      res.cookie("jwt", token, {
-        maxAge: 7 * 24 * 24 * 60 * 1000,
-        httpOnly: true,
-        secure: false,
-      });
+    res.cookie("jwt", token, {
+  maxAge: 7 * 24 * 60 * 60 * 1000, // (you had a small mistake btw)
+  httpOnly: true,
+  secure: true,        // REQUIRED for HTTPS (Render)
+  sameSite: "None",    // REQUIRED for cross-origin
+});
       return res.status(200).json({
         message: "Login Successful",
         success: true,
