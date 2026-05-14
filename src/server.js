@@ -9,12 +9,21 @@ import OrderRouter from "./route/order.route.js";
 const app = express();
 app.use(express.json());
 app.use(cookieparser());
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  }),
-);
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://restro-frontend-8997.onrender.com'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use("/auth", AuthRouter);
 app.use("/food", FoodRouter);
 app.use("/order", OrderRouter);
