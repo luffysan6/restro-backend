@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cookieparser());
 app.use(
   cors({
-    origin: "https://restro-frontend-8997.onrender.com",
+    origin: "*",
     credentials: true,
   }),
 );
