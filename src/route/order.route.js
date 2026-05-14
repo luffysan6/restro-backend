@@ -18,7 +18,7 @@ router.get(
   roleMiddleware("user"),
   GetAllOrderUser,
 ); // secure
-router.post("/", authMiddleware,roleMiddleware("admin"), CreateOrder); // secure
+router.post("/", authMiddleware,roleMiddleware("user"), CreateOrder); // secure
 // router.delete("/:id", authMiddleware, roleMiddleware("admin"), DeleteOrderById); // secure
 router.post(
   "/order/:id",
